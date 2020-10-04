@@ -1,0 +1,13 @@
+{
+  "name": "skeppy-bot-v2",
+  "version": "1.0.0",
+  "description": "A discord bot for Skeppy, but recoded :)",
+  "main": "main.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon"
+  },
+  "repository": "https://github.com/TheChicken14/skeppy-bot-v2",
+  "author": "Wisse / TheChicken14",
+  "license": "MIT"
+}
