@@ -9,5 +9,9 @@
   },
   "repository": "https://github.com/TheChicken14/skeppy-bot-v2",
   "author": "Wisse / TheChicken14",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "discord.js-commando": "discordjs/Commando",
+    "dotenv": "^8.2.0"
+  }
 }
