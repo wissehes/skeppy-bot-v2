@@ -1,0 +1,26 @@
+{
+  "Skeppy Commando Command": {
+    "prefix": "scc",
+    "body": [
+      "const SkeppyCommand = require(\"../../structures/SkeppyCommand\");",
+      "",
+      "module.exports = class $1Command extends SkeppyCommand {",
+      "  constructor(client) {",
+      "    super(client, {",
+      "      name: \"$2\",",
+      "      memberName: \"$3\",",
+      "      aliases: [$4],",
+      "      group: \"$5\",",
+      "      description: \"$6\",",
+      "    });",
+      "  }",
+      "",
+      "  async run(message) {",
+      "      $7",
+      "  }",
+      "};",
+      ""
+    ],
+    "description": "Skeppy Commando Command"
+  }
+}
