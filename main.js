@@ -1,12 +1,13 @@
-require("dotenv").config();
-
-const { CommandoClient } = require("discord.js-commando");
 const path = require("path");
+const SkeppyCommandoClient = require("./structures/SkeppyCommandoClient");
 
-const client = new CommandoClient({
+const config = require("./config");
+
+const client = new SkeppyCommandoClient({
   commandPrefix: "?",
   owner: "354289971361742848",
   invite: "https://discord.gg/dTJBDRU",
+  config,
 });
 
 client.registry
@@ -30,4 +31,4 @@ client.once("ready", () => {
 
 client.on("error", console.error);
 
-client.login(process.env.TOKEN);
+client.login(config.token);
