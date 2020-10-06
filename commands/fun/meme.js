@@ -9,6 +9,10 @@ class MemeCommand extends SkeppyCommand {
       aliases: [],
       group: "fun",
       description: "Sends a meme from reddit!",
+      throttling: {
+        duration: 3,
+        usages: 1,
+      },
     });
   }
 
