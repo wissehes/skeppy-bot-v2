@@ -11,7 +11,9 @@
   "author": "Wisse / TheChicken14",
   "license": "MIT",
   "dependencies": {
+    "@ksoft/api": "^3.1.9",
     "discord.js-commando": "discordjs/Commando",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.10.7"
   }
 }
