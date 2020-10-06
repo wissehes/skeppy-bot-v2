@@ -1,6 +1,12 @@
-const { Command } = require("discord.js-commando");
+const { Command, CommandInfo } = require("discord.js-commando");
 
 class SkeppyCommand extends Command {
+  /**
+   *
+   * @param {*} client Client
+   * @param {CommandInfo} info Command info
+   */
+
   constructor(client, info) {
     super(client, info);
 
