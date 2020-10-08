@@ -4,7 +4,7 @@ const SkeppyCommandoClient = require("./structures/SkeppyCommandoClient");
 const config = require("./config");
 
 const client = new SkeppyCommandoClient({
-  commandPrefix: "skeppy",
+  commandPrefix: config.prefix,
   owner: "354289971361742848",
   invite: "https://discord.gg/dTJBDRU",
   config,
