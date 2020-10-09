@@ -15,6 +15,7 @@
     "canvas": "^2.6.1",
     "discord.js": "^12.3.1",
     "discord.js-commando": "discordjs/Commando",
+    "moment": "^2.29.1",
     "mongoose": "^5.10.7"
   }
 }
