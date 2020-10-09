@@ -21,7 +21,9 @@ client.registry
     ["music", "Music"],
   ])
   .registerDefaultGroups()
-  .registerDefaultCommands()
+  .registerDefaultCommands({
+    unknownCommand: false,
+  })
   .registerCommandsIn(path.join(__dirname + "/commands"));
 
 client.once("ready", () => {
