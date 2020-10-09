@@ -117,3 +117,6 @@ dist
 
 # Config file
 config.js
+
+# macOS DS_Store files
+.DS_Store
