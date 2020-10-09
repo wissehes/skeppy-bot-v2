@@ -17,6 +17,7 @@ client.registry
     ["misc", "Misc"],
     ["fun", "Fun"],
     ["admin", "Admin"],
+    ["util", "Utility"],
     ["braincells", "Braincells"],
     ["music", "Music"],
   ])
