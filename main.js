@@ -16,6 +16,7 @@ client.registry
     ["levels", "Levels"],
     ["misc", "Misc"],
     ["fun", "Fun"],
+    ["image", "Image"],
     ["admin", "Admin"],
     ["util", "Utility"],
     ["braincells", "Braincells"],
