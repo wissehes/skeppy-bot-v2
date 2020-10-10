@@ -123,3 +123,6 @@ config.js
 
 # Settings DB
 db/settings.sqlite
+
+# Old scores
+scores.sqlite
