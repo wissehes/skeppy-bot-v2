@@ -122,4 +122,4 @@ config.js
 .DS_Store
 
 # Settings DB
-settings.sqlite
+db/settings.sqlite

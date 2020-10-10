@@ -10,7 +10,7 @@ class SkeppyCommandoClient extends CommandoClient {
     this.config = options.config;
     this.ksoft = new KSoftClient(this.config.api.ksoft);
 
-    this.settingsKeyv = new Keyv("sqlite://settings.sqlite");
+    this.settingsKeyv = new Keyv("sqlite://db/settings.sqlite");
 
     this.setProvider(new KeyvProvider(this.settingsKeyv));
   }
