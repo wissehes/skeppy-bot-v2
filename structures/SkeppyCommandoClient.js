@@ -7,6 +7,7 @@ const KeyvProvider = require("commando-provider-keyv");
 const connectToMongoDB = require("../db/connect");
 
 const SkeppyBraincells = require("./SkeppyBraincells");
+const SkeppyPoints = require("./SkeppyPoints");
 
 class SkeppyCommandoClient extends CommandoClient {
   constructor(options) {
@@ -18,6 +19,8 @@ class SkeppyCommandoClient extends CommandoClient {
     this.ksoft = new KSoftClient(this.config.api.ksoft);
     // Bind SkeppyBraincells to this
     this.braincells = new SkeppyBraincells(this);
+    // Bind SkeppyPoints to this
+    this.points = new SkeppyPoints(this);
 
     // DB stuff
     connectToMongoDB(this.config.mongoURI);
