@@ -11,10 +11,13 @@
   "author": "Wisse / TheChicken14",
   "license": "MIT",
   "dependencies": {
+    "@keyv/sqlite": "^2.0.2",
     "@ksoft/api": "^3.1.9",
     "canvas": "^2.6.1",
+    "commando-provider-keyv": "^2.1.0",
     "discord.js": "^12.3.1",
     "discord.js-commando": "discordjs/Commando",
+    "keyv": "^4.0.3",
     "moment": "^2.29.1",
     "mongoose": "^5.10.7"
   }
