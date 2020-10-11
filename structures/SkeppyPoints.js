@@ -34,6 +34,18 @@ class SkeppyPoints {
   }
 
   /**
+   * Get all points for a guild
+   * @param {Guild} guild the guild in question
+   */
+  async getAll(guild) {
+    const allPoints = await Point.find({
+      guildID: guild.id,
+    });
+
+    return allPoints;
+  }
+
+  /**
    * Give a user points
    * @param {Guild} guild The guild
    * @param {GuildMember} member The member
