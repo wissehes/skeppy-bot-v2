@@ -1,4 +1,4 @@
-const { User, Guild } = require("discord.js");
+const { Guild, GuildMember, MessageAttachment } = require("discord.js");
 const Point = require("../db/models/Point");
 const PointsUtils = require("../utils/PointsUtils");
 
@@ -8,14 +8,14 @@ class SkeppyPoints {
   }
 
   /**
-   * Get a user's points
+   * Get a member's points
    * @param {Guild} guild The guild of the user
-   * @param {User} user The user in question
+   * @param {GuildMember} member The member in question
    */
-  async get(guild, user) {
+  async get(guild, member) {
     const foundUser = await Point.findOne({
       guildID: guild.id,
-      userID: user.id,
+      userID: member.id,
     });
 
     if (foundUser) {
@@ -23,7 +23,7 @@ class SkeppyPoints {
     } else {
       const newUser = new Point({
         guildID: guild.id,
-        userID: user.id,
+        userID: member.id,
       });
       await newUser.save();
 
@@ -34,11 +34,11 @@ class SkeppyPoints {
   /**
    * Give a user points
    * @param {Guild} guild The guild
-   * @param {User} user The user
+   * @param {GuildMember} member The member
    * @param {Number} amount The amount of points to give
    */
-  async givePoints(guild, user, amount) {
-    const points = await this.get(guild, user);
+  async givePoints(guild, member, amount) {
+    const points = await this.get(guild, member);
 
     points.points += amount;
     points.level = PointsUtils.generateLevel(points.points);
