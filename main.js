@@ -33,6 +33,12 @@ client.once("ready", () => {
   client.user.setActivity("with Commando");
 });
 
+client.on("message", (message) => {
+  if (message.author.bot || message.channel.type !== "text") return;
+
+  client.points.givePoints(message.guild, message.member, 1);
+});
+
 client.on("error", console.error);
 
 client.login(config.token);
