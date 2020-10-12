@@ -30,7 +30,9 @@ client.registry
 
 client.once("ready", () => {
   console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
-  client.user.setActivity("with Commando");
+  client.updatePresence();
+  // Update every hour
+  setInterval(() => client.updatePresence(), 3600000);
 });
 
 client.on("message", (message) => {
