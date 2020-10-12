@@ -8,6 +8,7 @@ module.exports = class PointsCommand extends SkeppyCommand {
       aliases: ["xp", "rank", "level"],
       group: "levels",
       description: "Shows your points!",
+      guildOnly: true,
       args: [
         {
           key: "member",
