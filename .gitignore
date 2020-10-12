@@ -124,5 +124,8 @@ config.js
 # Settings DB
 db/settings.sqlite
 
+# Custom presence store
+db/presence.txt
+
 # Old scores
 scores.sqlite
