@@ -21,6 +21,7 @@ client.registry
     ["util", "Utility"],
     ["braincells", "Braincells"],
     ["music", "Music"],
+    ["games", "Games"],
   ])
   .registerDefaultGroups()
   .registerDefaultCommands({
