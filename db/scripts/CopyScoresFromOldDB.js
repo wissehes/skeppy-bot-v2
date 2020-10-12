@@ -25,7 +25,7 @@ const mapped = all.map((s) => ({
   guildID: s.guild,
   userID: s.user,
   points: s.points,
-  level: s.level,
+  level: Math.floor(0.1 * Math.sqrt(s.points)),
 }));
 
 Point.insertMany(mapped);
