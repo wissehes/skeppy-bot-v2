@@ -13,6 +13,13 @@ class MemeCommand extends SkeppyCommand {
         duration: 3,
         usages: 1,
       },
+      credits: [
+        {
+          name: "KSoft.Si",
+          for: "Memes API",
+          url: "https://api.ksoft.si/",
+        },
+      ],
     });
   }
 
