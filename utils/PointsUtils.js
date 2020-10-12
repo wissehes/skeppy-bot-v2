@@ -62,6 +62,20 @@ class PointsUtils {
     );
     return rank;
   }
+
+  /**
+   * Get the appropriate emoji for the rank the user has
+   * @param {number} rank The rank
+   */
+  static getRankEmoji(rank) {
+    let emojis = {
+      1: "🏆",
+      2: "🥈",
+      3: "🏅",
+      else: "🎖",
+    };
+    return emojis[rank] || emojis.else;
+  }
 }
 
 module.exports = PointsUtils;
