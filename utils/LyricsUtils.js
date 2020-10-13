@@ -10,7 +10,7 @@ class LyricsUtils {
     this.song = song;
     this.requestedBy = message.author.tag;
 
-    this.lyricLengthLimit = 3900;
+    this.lyricLengthLimit = 2040;
   }
 
   /**
