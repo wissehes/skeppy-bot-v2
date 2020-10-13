@@ -171,7 +171,7 @@ canvacord@^5.0.7:
     moment-duration-format "^2.3.2"
     node-canvas-with-twemoji-and-discord-emoji "^1.1.4"
 
-canvas@^2.2.0, canvas@^2.6.1:
+canvas@*, canvas@^2.2.0, canvas@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.6.1.tgz#0d087dd4d60f5a5a9efa202757270abea8bef89e"
   integrity sha512-S98rKsPcuhfTcYbtF53UIJhcbgIAK533d1kJKMwsMwAIFgfd58MOyxRud3kktlzWiEkFliaJtvyZCBtud/XVEA==
@@ -179,6 +179,14 @@ canvas@^2.2.0, canvas@^2.6.1:
     nan "^2.14.0"
     node-pre-gyp "^0.11.0"
     simple-get "^3.0.3"
+
+captcha-canvas@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/captcha-canvas/-/captcha-canvas-2.2.1.tgz#ce976c77acd0726949360bbc7069676613a6c5cf"
+  integrity sha512-PIEBf8oh3o3yk9Fj3b1/WMU/pV/UuGzBE/phM9jHZf2jwg1s0ZeBEKCwAlFCZ3fZ8+xLXV98/jegK6ox21N6WQ==
+  dependencies:
+    canvas "*"
+    deepmerge "^4.2.2"
 
 chownr@^1.1.1:
   version "1.1.4"
@@ -247,6 +255,11 @@ deep-extend@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
   integrity sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==
+
+deepmerge@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
+  integrity sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
 
 delayed-stream@~1.0.0:
   version "1.0.0"
