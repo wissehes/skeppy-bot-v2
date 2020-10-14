@@ -11,6 +11,7 @@ const SkeppyPoints = require("./SkeppyPoints");
 
 const fs = require("fs");
 const SkeppyMusicClient = require("./SkeppyMusicClient");
+const QueueHandler = require("./QueueHandler");
 class SkeppyCommandoClient extends CommandoClient {
   constructor(options) {
     super(options);
@@ -25,6 +26,7 @@ class SkeppyCommandoClient extends CommandoClient {
     this.points = new SkeppyPoints(this);
     // Bind music stuff to this
     this.player = new SkeppyMusicClient(this, this.config.lavalinkNodes);
+    this.queue = new QueueHandler(this);
 
     // DB stuff
     connectToMongoDB(this.config.mongoURI);
