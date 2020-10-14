@@ -32,7 +32,7 @@ module.exports = class BraincellsCommand extends SkeppyCommand {
       embed.setFooter(
         "Tip: You can gain new braincells with the gain command!"
       );
-      message.embed(embed);
     }
+    message.embed(embed);
   }
 };
