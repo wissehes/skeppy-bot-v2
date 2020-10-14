@@ -10,6 +10,7 @@ const SkeppyBraincells = require("./SkeppyBraincells");
 const SkeppyPoints = require("./SkeppyPoints");
 
 const fs = require("fs");
+const SkeppyMusicClient = require("./SkeppyMusicClient");
 class SkeppyCommandoClient extends CommandoClient {
   constructor(options) {
     super(options);
@@ -22,6 +23,8 @@ class SkeppyCommandoClient extends CommandoClient {
     this.braincells = new SkeppyBraincells(this);
     // Bind SkeppyPoints to this
     this.points = new SkeppyPoints(this);
+    // Bind music stuff to this
+    this.player = new SkeppyMusicClient(this, this.config.lavalinkNodes);
 
     // DB stuff
     connectToMongoDB(this.config.mongoURI);
