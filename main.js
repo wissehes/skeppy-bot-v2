@@ -40,32 +40,6 @@ client.on("message", (message) => {
   if (message.author.bot || message.channel.type !== "text") return;
 
   client.points.givePoints(message.guild, message.member, 1);
-
-  const musicCommandsArr = [
-    "earrape",
-    "lock",
-    "loop",
-    "move",
-    "np",
-    "pause",
-    "play",
-    "queue",
-    "resume",
-    "seek",
-    "shuffle",
-    "skip",
-    "stop",
-    "volume",
-  ];
-
-  if (
-    musicCommandsArr.some((a) => message.content.includes(a)) &&
-    message.content.startsWith(client.commandPrefix)
-  ) {
-    message.reply(
-      "music commands are still a work in progress! (if they're gonna be added)"
-    );
-  }
 });
 
 client.on("error", console.error);
