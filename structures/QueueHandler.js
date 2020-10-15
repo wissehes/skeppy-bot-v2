@@ -1,4 +1,5 @@
-const { Collection } = require("discord.js");
+const { Collection, User, Message } = require("discord.js");
+const { ShoukakuTrack } = require("shoukaku");
 const SkeppyDispatcher = require("./SkeppyDispatcher");
 
 class QueueHandler {
@@ -14,7 +15,18 @@ class QueueHandler {
     return this.players.delete(id);
   }
 
-  async handle({ message, node, track }) {
+  /**
+   *
+   * @param {object} trackData The trackdata
+   * @param {Message} trackData.message The message object
+   * @param {object} trackData.node The node to use
+   * @param {ShoukakuTrack} trackData.track The track object
+   */
+  async handle(trackData) {
+    let { message, node, track } = trackData;
+
+    track = new SkeppyTrack(track, message.author);
+
     const exists = this.players.get(message.guild.id);
 
     if (exists) {
@@ -37,6 +49,24 @@ class QueueHandler {
 
       return dispatcher;
     }
+  }
+}
+
+class SkeppyTrack {
+  /**
+   * Create a new track
+   * @constructor
+   * @param {ShoukakuTrack} track
+   * @param {User} user
+   */
+  constructor(track, user) {
+    this.track = track.track;
+    this.info = track.info;
+    this.requestedBy = {
+      id: user.id,
+      avatarURL: user.displayAvatarURL({ dynamic: true }),
+      mention: user.toString(),
+    };
   }
 }
 
