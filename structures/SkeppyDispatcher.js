@@ -1,3 +1,5 @@
+const MusicUtils = require("../utils/MusicUtils");
+
 class SkeppyDispatcher {
   constructor(options) {
     this.client = options.client;
@@ -8,10 +10,16 @@ class SkeppyDispatcher {
     this.queue = [];
     this.current = null;
 
+    this.utils = new MusicUtils(this.client);
+
     this.player.on("start", () => {
-      this.textChannel
-        .send(`Now playing **${this.current.info.title}**`)
-        .catch((e) => null);
+      const embed = this.utils.nowPlayingEmbed(
+        this.queue,
+        this.player,
+        this.current
+      );
+
+      this.textChannel.send(embed).catch((e) => null);
     });
 
     this.player.on("end", () => {
