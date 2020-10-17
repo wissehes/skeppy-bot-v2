@@ -33,7 +33,11 @@ module.exports = class PlayCommand extends SkeppyCommand {
       return message.reply("I couldn't find anything...");
     }
 
-    const track = new SkeppyTrack(results.tracks[0], message.author);
+    const track = new SkeppyTrack(
+      results.tracks[0],
+      message.author,
+      message.channel
+    );
 
     const dispatcher = await this.client.queue.handle({
       message,
