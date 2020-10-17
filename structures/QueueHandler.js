@@ -29,7 +29,7 @@ class QueueHandler {
     const exists = this.players.get(message.guild.id);
 
     if (exists) {
-      exists.queue.push(track);
+      exists.addTrack(track);
     } else {
       const player = await node.joinVoiceChannel({
         guildID: message.guild.id,
@@ -43,7 +43,7 @@ class QueueHandler {
         player,
       });
 
-      dispatcher.queue.push(track);
+      dispatcher.addTrack(track);
       this.players.set(message.guild.id, dispatcher);
 
       return dispatcher;
