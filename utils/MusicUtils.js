@@ -20,7 +20,7 @@ class MusicUtils {
 
     const embed = new MessageEmbed()
       .setAuthor(
-        `Playing in ${channel.name}`,
+        `Playing in #${channel.name}`,
         currentTrack.requestedBy.avatarURL
       )
       .setTitle(currentTrack.info.title || "Unknown title")
@@ -32,6 +32,30 @@ class MusicUtils {
         queue.length > 1 ? "tracks" : "track"
       } remaining in the queue...`
     );
+
+    return embed;
+  }
+
+  /**
+   * Generate the "added to queue" embed
+   * @param {SkeppyTrack} newTrack The new track
+   */
+  addedToQueueEmbed(newTrack) {
+    const requestedBy = this.client.users.resolve(newTrack.requestedBy.id);
+
+    const embed = new MessageEmbed()
+      .setAuthor(`Added to the queue`, newTrack.requestedBy.avatarURL)
+      .setTitle(newTrack.info.title || "Unknown title")
+      .setURL(newTrack.info.uri)
+      .setColor("RANDOM")
+      .setDescription(
+        `Length: **${this.formatMS(newTrack.info.length)}**
+        ${
+          newTrack.info.author ? `Uploaded by: **${newTrack.info.author}**` : ""
+        }
+Requested by: **${requestedBy.username}**\`#${requestedBy.discriminator}\`
+`
+      );
 
     return embed;
   }
