@@ -1,6 +1,7 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, Message } = require("discord.js");
 const { ShoukakuPlayer } = require("shoukaku");
 const SkeppyTrack = require("../structures/SkeppyTrack");
+const SkeppyCommandoClient = require("../structures/SkeppyCommandoClient");
 
 class MusicUtils {
   constructor(client) {
@@ -58,6 +59,38 @@ Requested by: **${requestedBy.username}**\`#${requestedBy.discriminator}\`
       );
 
     return embed;
+  }
+
+  /**
+   * Check if the user is allowed to execute the music commands
+   * @param {object} opts The options object
+   * @param {Message} opts.message The message object
+   * @param {SkeppyCommandoClient} opts.client The client
+   */
+  static checkIfAllowed(opts) {
+    const { message, client } = opts;
+
+    if (!message.member.voice.channel) {
+      message.reply("You need to be in a voice channel!");
+      return false;
+    }
+
+    if (!client.queue.has(message.guild.id)) {
+      message.reply("Nothing's playing!");
+      return false;
+    }
+
+    const { player } = client.queue.players.get(message.guild.id);
+
+    const memberVCID = message.member.voice.channel.id;
+    const playerVCID = player.voiceConnection.voiceChannelID;
+
+    if (memberVCID !== playerVCID) {
+      message.reply("You need to be in the same channel as me!");
+      return false;
+    }
+
+    return true;
   }
 
   /**
