@@ -44,7 +44,7 @@ class SkeppyDispatcher {
 
   async play() {
     if (!this.client.queue.has(this.guild.id) || !this.queue.length) {
-      return this.destroy();
+      return this.destroy("emptyQueue");
     }
     this.current = this.queue.shift();
     await this.player.playTrack(this.current.track);
@@ -62,13 +62,27 @@ class SkeppyDispatcher {
     track.requestChannel.send(embed).catch((e) => null);
   }
 
-  destroy() {
+  destroy(reason) {
     this.player.disconnect();
     this.queue.length = 0;
     this.client.queue.delete(this.guild.id);
-    this.textChannel
-      .send("Left the channel due to an empty queue!")
-      .catch(() => null);
+
+    let toSend;
+    switch (reason) {
+      case "emptyQueue":
+        toSend = "Done playing!";
+        break;
+
+      case "stop":
+        toSend = "Stopped playing and left the channel!";
+        break;
+
+      default:
+        toSend = "Left the channel.";
+        break;
+    }
+
+    this.textChannel.send(toSend).catch(() => null);
   }
 }
 
