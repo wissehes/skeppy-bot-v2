@@ -1,4 +1,4 @@
-const { User } = require("discord.js");
+const { User, TextChannel } = require("discord.js");
 const { ShoukakuTrack } = require("shoukaku");
 
 class SkeppyTrack {
@@ -7,10 +7,12 @@ class SkeppyTrack {
    * @constructor
    * @param {ShoukakuTrack} track
    * @param {User} user
+   * @param {TextChannel} textChannel
    */
-  constructor(track, user) {
+  constructor(track, user, textChannel) {
     this.track = track.track;
     this.info = track.info;
+    this.requestChannel = textChannel;
     this.requestedBy = {
       id: user.id,
       avatarURL: user.displayAvatarURL({ dynamic: true }),
