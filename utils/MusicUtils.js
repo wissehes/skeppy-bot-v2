@@ -80,17 +80,17 @@ Requested by: **${requestedBy.username}**\`#${requestedBy.discriminator}\`
       return false;
     }
 
-    const { player } = client.queue.players.get(message.guild.id);
+    const dispatcher = client.queue.players.get(message.guild.id);
 
     const memberVCID = message.member.voice.channel.id;
-    const playerVCID = player.voiceConnection.voiceChannelID;
+    const playerVCID = dispatcher.player.voiceConnection.voiceChannelID;
 
     if (memberVCID !== playerVCID) {
       message.reply("You need to be in the same channel as me!");
       return false;
     }
 
-    return true;
+    return dispatcher;
   }
 
   /**
