@@ -21,12 +21,10 @@ class QueueHandler {
    * @param {object} trackData The trackdata
    * @param {Message} trackData.message The message object
    * @param {object} trackData.node The node to use
-   * @param {ShoukakuTrack} trackData.track The track object
+   * @param {SkeppyTrack} trackData.track The track object
    */
   async handle(trackData) {
     let { message, node, track } = trackData;
-
-    track = new SkeppyTrack(track, message.author);
 
     const exists = this.players.get(message.guild.id);
 
