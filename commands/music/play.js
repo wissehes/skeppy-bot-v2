@@ -6,7 +6,7 @@ module.exports = class PlayCommand extends SkeppyCommand {
     super(client, {
       name: "play",
       memberName: "play",
-      aliases: [],
+      aliases: ["p"],
       group: "music",
       description: "Play music!",
       guildOnly: true,
