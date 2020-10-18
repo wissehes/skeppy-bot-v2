@@ -62,6 +62,11 @@ class SkeppyDispatcher {
     track.requestChannel.send(embed).catch((e) => null);
   }
 
+  getQueue() {
+    // Send it this way so when splicing, it doesnt fuck up this.queue
+    return [...this.queue];
+  }
+
   destroy(reason) {
     this.player.disconnect();
     this.queue.length = 0;
