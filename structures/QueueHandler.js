@@ -1,5 +1,4 @@
 const { Collection, User, Message } = require("discord.js");
-const { ShoukakuTrack } = require("shoukaku");
 const SkeppyDispatcher = require("./SkeppyDispatcher");
 const SkeppyTrack = require("./SkeppyTrack");
 
