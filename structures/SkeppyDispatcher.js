@@ -56,10 +56,6 @@ class SkeppyDispatcher {
    */
   addTrack(track) {
     this.queue.push(track);
-
-    const embed = this.utils.addedToQueueEmbed(track);
-
-    track.requestChannel.send(embed).catch((e) => null);
   }
 
   getQueue() {
