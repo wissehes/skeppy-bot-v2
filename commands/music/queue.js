@@ -11,24 +11,51 @@ module.exports = class QueueCommand extends SkeppyCommand {
       group: "music",
       description: "Displays the current playing queue",
       guildOnly: true,
+      args: [
+        {
+          key: "page",
+          prompt: "Which page do you want to view?",
+          type: "integer",
+          default: 1,
+          min: 1,
+        },
+      ],
     });
   }
 
-  async run(message) {
-    if (this.client.queue.has(message.guild.id)) {
-      const dispatcher = this.client.queue.get(message.guild.id);
+  async run(message, { page }) {
+    if (!this.client.queue.has(message.guild.id)) {
+      return message.reply("there's nothing playing right now!");
+    }
 
-      const embed = new MessageEmbed()
-        .setTitle(`Queue for ${message.guild.name}`)
-        .setColor("BLUE").setDescription(stripIndents`🔊 Now playing: 
+    const dispatcher = this.client.queue.get(message.guild.id);
+
+    const embed = new MessageEmbed()
+      .setTitle(`Queue for ${message.guild.name}`)
+      .setColor("BLUE")
+      .setFooter(`Page ${page} | ${dispatcher.queue.length} tracks`);
+
+    const mappedQueue = this.displayQueue(dispatcher, page);
+    if (page > 1 && !mappedQueue.length) {
+      return message.reply("that page doesn't exist!");
+    }
+
+    if (mappedQueue.length > 10) {
+      mappedQueue.splice(10, mappedQueue.length);
+    }
+
+    if (page == 1) {
+      embed.setDescription(stripIndents`🔊 Now Playing:
         ${this.displayCurrent(dispatcher)}
 
         🔊 Playing next:
-        ${this.displayQueue(dispatcher)}
+        ${mappedQueue.length ? mappedQueue.join("\n") : "*Nothing...*"}
         `);
-
-      message.embed(embed);
+    } else {
+      embed.setDescription(mappedQueue.join("\n"));
     }
+
+    message.embed(embed);
   }
 
   displayCurrent(dispatcher) {
@@ -39,7 +66,7 @@ module.exports = class QueueCommand extends SkeppyCommand {
     return `[${current.info.title}](${current.info.uri}) [${currentPosFormatted}/${totalTimeFormatted}]`;
   }
 
-  displayQueue(dispatcher) {
+  displayQueue(dispatcher, page) {
     const queue = dispatcher.getQueue();
 
     const mapped = queue.map(
@@ -49,16 +76,10 @@ module.exports = class QueueCommand extends SkeppyCommand {
         }) [${this.client.music.formatMS(t.info.length)}]`
     );
 
-    if (mapped.length > 10) {
-      mapped.splice(10, mapped.length - 1);
-
-      const remainingLength = queue.length - 10;
-
-      return `${mapped.join("\n")}
-      
-        *and ${remainingLength}* more...`;
+    if (page > 1) {
+      return mapped.splice((page - 1) * 10, page * 10);
     } else {
-      return mapped.join("\n");
+      return mapped;
     }
   }
 };
