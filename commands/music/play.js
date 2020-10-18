@@ -1,3 +1,4 @@
+const { MessageEmbed } = require("discord.js");
 const SkeppyCommand = require("../../structures/SkeppyCommand");
 const SkeppyTrack = require("../../structures/SkeppyTrack");
 
@@ -38,14 +39,20 @@ module.exports = class PlayCommand extends SkeppyCommand {
 
     const node = this.client.player.getNode();
 
-    const results = await node.rest.resolve(song, "youtube");
+    let results;
+
+    if (this.checkURL(song)) {
+      results = await node.rest.resolve(song);
+    } else {
+      results = await node.rest.resolve(song, "youtube");
+    }
 
     if (!results) {
       return message.reply("I couldn't find anything...");
     }
 
     const track = new SkeppyTrack(
-      results.tracks[0],
+      results.tracks.shift(),
       message.author,
       message.channel
     );
@@ -56,8 +63,40 @@ module.exports = class PlayCommand extends SkeppyCommand {
       track,
     });
 
+    if (results.type == "PLAYLIST") {
+      // Add all tracks to the queue
+      for (const track of results.tracks) {
+        await this.client.queue.handle({
+          message,
+          node,
+          track: new SkeppyTrack(track, message.author, message.channel),
+        });
+      }
+
+      // Send the playlist added to queue embed
+      const playlistEmbed = new MessageEmbed()
+        .setTitle(`Added playlist ${results.playlistName} to queue`)
+        .setDescription(
+          `Added ${results.tracks.length + 1} tracks to the queue!`
+        )
+        .setColor("GREEN");
+
+      message.embed(playlistEmbed);
+    } else {
+      message.embed(this.client.music.addedToQueueEmbed(track));
+    }
+
     if (dispatcher) {
       await dispatcher.play();
+    }
+  }
+
+  checkURL(text) {
+    try {
+      new URL(text);
+      return true;
+    } catch {
+      return false;
     }
   }
 };
