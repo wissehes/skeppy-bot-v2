@@ -15,6 +15,9 @@ class QueueHandler {
   delete(id) {
     return this.players.delete(id);
   }
+  get(id) {
+    return this.players.get(id);
+  }
 
   /**
    *
