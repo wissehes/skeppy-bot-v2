@@ -64,6 +64,8 @@ class MusicPermUtils {
     return true;
   }
 
+  canSkip = this.canStop;
+
   /**
    * Send an embed for an error
    * @param {CommandoMessage} message the message object
