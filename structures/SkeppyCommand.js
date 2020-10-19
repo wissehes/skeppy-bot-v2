@@ -1,4 +1,5 @@
 const { Command, CommandInfo } = require("discord.js-commando");
+const replies = require("../assets/replies.json");
 
 class SkeppyCommand extends Command {
   /**
@@ -9,6 +10,8 @@ class SkeppyCommand extends Command {
 
   constructor(client, info) {
     super(client, info);
+
+    this.replies = replies;
 
     this.credit = info.credit || [];
     this.credit.push({
