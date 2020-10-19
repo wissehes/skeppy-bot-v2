@@ -68,22 +68,9 @@ class SkeppyDispatcher {
     this.queue.length = 0;
     this.client.queue.delete(this.guild.id);
 
-    let toSend;
-    switch (reason) {
-      case "emptyQueue":
-        toSend = "Done playing!";
-        break;
-
-      case "stop":
-        toSend = "Stopped playing and left the channel!";
-        break;
-
-      default:
-        toSend = "Left the channel.";
-        break;
+    if (reason == "emptyQueue") {
+      this.textChannel.send("Done playing!").catch(() => null);
     }
-
-    this.textChannel.send(toSend).catch(() => null);
   }
 }
 
