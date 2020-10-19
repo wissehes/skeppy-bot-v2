@@ -24,15 +24,21 @@ module.exports = class LyricsCommand extends SkeppyCommand {
       ],
       args: [
         {
-          key: "query",
+          key: "_query",
           prompt: "Which song's lyrics would you like to get?",
           type: "string",
+          isEmpty: (_v, message) => {
+            return !message.client.queue.has(message.guild.id);
+          },
         },
       ],
     });
   }
 
-  async run(message, { query }) {
+  async run(message, { _query }) {
+    const dispatcher = this.client.queue.get(message.guild.id);
+
+    const query = _query || dispatcher.current.info.title;
     let songs;
     try {
       songs = await this.client.ksoft.lyrics.search(query);
