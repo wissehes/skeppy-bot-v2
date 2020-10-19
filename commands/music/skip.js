@@ -8,7 +8,7 @@ module.exports = class SkipCommand extends SkeppyCommand {
       memberName: "skip",
       aliases: ["next"],
       group: "music",
-      description: "Skips to the next song!",
+      description: "Skips the current track",
       guildOnly: true,
     });
     this.utils = new MusicPermUtils();
