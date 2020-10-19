@@ -16,12 +16,7 @@ module.exports = class StopCommand extends SkeppyCommand {
   }
 
   async run(message) {
-    // const dispatcher = MusicUtils.checkIfAllowed({
-    //   message,
-    //   client: this.client,
-    // });
-
-    if (!this.utils.test(message, "STOP_QUEUE")) {
+    if (!this.utils.canStop(message)) {
       return;
     }
 
