@@ -2,6 +2,7 @@ const { MessageEmbed, Message } = require("discord.js");
 const { ShoukakuPlayer } = require("shoukaku");
 const SkeppyTrack = require("../structures/SkeppyTrack");
 const SkeppyCommandoClient = require("../structures/SkeppyCommandoClient");
+const { stripIndents } = require("common-tags");
 
 class MusicUtils {
   constructor(client) {
@@ -48,15 +49,14 @@ class MusicUtils {
       .setAuthor(`Added to the queue`, newTrack.requestedBy.avatarURL)
       .setTitle(newTrack.info.title || "Unknown title")
       .setURL(newTrack.info.uri)
-      .setColor("RANDOM")
-      .setDescription(
-        `Length: **${this.formatMS(newTrack.info.length)}**
+      .setColor("RANDOM").setDescription(stripIndents`Length: **${this.formatMS(
+      newTrack.info.length
+    )}**
         ${
           newTrack.info.author ? `Uploaded by: **${newTrack.info.author}**` : ""
         }
 Requested by: **${requestedBy.username}**\`#${requestedBy.discriminator}\`
-`
-      );
+`);
 
     return embed;
   }
