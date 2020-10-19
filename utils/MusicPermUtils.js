@@ -67,6 +67,19 @@ class MusicPermUtils {
   canSkip = this.canStop;
 
   /**
+   * Check if there's a queue playing
+   * @param {CommandoMessage} message
+   */
+  isPlaying(message) {
+    if (!this.tests.PLAYING(message)) {
+      this.errorEmbed(message, "no_player");
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
    * Send an embed for an error
    * @param {CommandoMessage} message the message object
    * @param {string} type The error type
