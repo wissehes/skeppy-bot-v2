@@ -15,6 +15,20 @@ class SkeppyDispatcher {
 
     this.utils = new MusicUtils(this.client);
 
+    this.listeners = [];
+
+    for (const playerEvent of ["closed", "error", "nodeDisconnect"]) {
+      const listener = this.player.on(playerEvent, () => {
+        this.queue.length = 0;
+        try {
+          this.destroy();
+        } catch (e) {
+          null;
+        }
+      });
+      this.listeners.push(listener);
+    }
+
     this.player.on("start", () => {
       if (!this.firstTrack) {
         const embed = this.utils.nowPlayingEmbed(
@@ -32,13 +46,6 @@ class SkeppyDispatcher {
         this.queue.length = 0;
         this.destroy();
       });
-
-      for (const playerEvent of ["closed", "error", "nodeDisconnect"]) {
-        this.player.on(playerEvent, () => {
-          this.queue.length = 0;
-          this.destroy();
-        });
-      }
     });
   }
 
@@ -67,6 +74,7 @@ class SkeppyDispatcher {
     this.player.disconnect();
     this.queue.length = 0;
     this.client.queue.delete(this.guild.id);
+    this.player.removeAllListeners();
 
     if (reason == "emptyQueue") {
       this.textChannel.send("Done playing!").catch(() => null);
