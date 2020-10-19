@@ -5,6 +5,63 @@ const { MessageEmbed } = require("discord.js");
 const { CommandoMessage } = require("discord.js-commando");
 
 class MusicPermUtils {
+  constructor() {
+    this.requirements = {
+      MEMBER_VC: {
+        description: "Requires a user to be in a voice channel",
+        test: (message) => {
+          return !!message.member.voice.id;
+        },
+      },
+      PLAYING: {
+        description: "Requires there to be a player in the guild",
+        test: (message) => {
+          return message.client.queue.has(message.guild.id);
+        },
+      },
+      SAME_VC: {
+        description:
+          "Requires the user to be in the same voice channel as the bot",
+        test: (message) => {
+          if (!message.member.voice.channel.id) return false;
+
+          const dispatcher = message.client.queue.get(message.guild.id);
+          if (dispatcher) {
+            if (
+              dispatcher.player.voiceConnection.voiceChannelID ==
+              message.member.voice.channel.id
+            ) {
+              return true;
+            }
+          } else return false;
+        },
+      },
+    };
+
+    this.permissions = {
+      ADD_SONGS: {
+        description: "Add songs to the queue and start the queue",
+        requires: ["MEMBER_VC", "SAME_VC"],
+      },
+      STOP_QUEUE: {
+        description: "Stop the queue from playing",
+        requires: ["MEMBER_VC", "PLAYING", "SAME_VC"],
+      },
+    };
+  }
+
+  /**
+   * Test for requirements
+   * @param {CommandoMessage} message
+   * @param {String} permission
+   */
+  test(message, permission) {
+    const perms = this.permissions[permission].requires;
+    const permsToCheck = perms.map((a) => this.requirements[a]);
+
+    return !permsToCheck.some((a) => !a.test(message));
+  }
+
   /**
    * Check if a user is allowed to add songs to the queue
    * @param {CommandoMessage} message The message object
