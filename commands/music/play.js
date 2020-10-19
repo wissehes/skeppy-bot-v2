@@ -26,21 +26,7 @@ module.exports = class PlayCommand extends SkeppyCommand {
   }
 
   async run(message, { song }) {
-    // if (!message.member.voice.channel) {
-    //   return message.reply("you're not in a voicechannel!");
-    // }
-
-    // const doesExist = this.client.queue.players.get(message.guild.id);
-    // if (doesExist) {
-    //   if (
-    //     doesExist.player.voiceConnection.voiceChannelID !==
-    //     message.member.voice.channel.id
-    //   ) {
-    //     return message.reply("You're not in the same channel as me!");
-    //   }
-    // }
-
-    if (!this.utils.addSongs(message)) {
+    if (!this.utils.canStartOrPlay(message)) {
       return;
     }
 
