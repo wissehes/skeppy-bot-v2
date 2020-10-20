@@ -42,6 +42,9 @@ client.on("message", (message) => {
   client.points.givePoints(message.guild, message.member, 1);
 });
 
+client.on("guildCreate", () => client.updatePresence());
+client.on("guildDelete", () => client.updatePresence());
+
 client.on("error", console.error);
 
 client.login(config.token);
