@@ -29,7 +29,9 @@ module.exports = class LyricsCommand extends SkeppyCommand {
           prompt: "Which song's lyrics would you like to get?",
           type: "string",
           isEmpty: (_v, message) => {
-            return !message.client.queue.has(message.guild.id);
+            if (message.client.queue.has(message.guild.id)) {
+              return false;
+            } else return false;
           },
         },
       ],
@@ -40,6 +42,7 @@ module.exports = class LyricsCommand extends SkeppyCommand {
     const dispatcher = this.client.queue.get(message.guild.id);
 
     const query = _query || dispatcher.current.info.title;
+
     let songs;
     try {
       songs = await this.client.ksoft.lyrics.search(query);
