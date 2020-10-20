@@ -1,7 +1,17 @@
+const { Guild, TextChannel } = require("discord.js");
+const { ShoukakuPlayer } = require("shoukaku");
 const MusicUtils = require("../utils/MusicUtils");
 const SkeppyTrack = require("./SkeppyTrack");
 
 class SkeppyDispatcher {
+  /**
+   * @constructor
+   * @param {object} options
+   * @param {SkeppyClient} options.client
+   * @param {Guild} options.guild
+   * @param {TextChannel} options.textChannel
+   * @param {ShoukakuPlayer} options.player
+   */
   constructor(options) {
     this.client = options.client;
     this.guild = options.guild;
