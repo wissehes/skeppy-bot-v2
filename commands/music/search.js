@@ -30,11 +30,14 @@ module.exports = class SearchCommand extends SkeppyCommand {
       return;
     }
 
+    message.channel.startTyping();
+
     const node = this.client.player.getNode();
 
     const results = await node.rest.resolve(query, "youtube");
 
     if (!results.tracks.length) {
+      message.channel.stopTyping();
       message.reply("I couldn't find anything...");
       return;
     }

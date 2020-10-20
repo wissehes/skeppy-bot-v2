@@ -30,6 +30,8 @@ module.exports = class PlayCommand extends SkeppyCommand {
       return;
     }
 
+    message.channel.startTyping();
+
     const node = this.client.player.getNode();
 
     let results;
@@ -41,7 +43,9 @@ module.exports = class PlayCommand extends SkeppyCommand {
     }
 
     if (!results) {
-      return message.reply("I couldn't find anything...");
+      message.channel.stopTyping();
+      message.reply("I couldn't find anything...");
+      return;
     }
 
     const track = new SkeppyTrack(
@@ -55,6 +59,8 @@ module.exports = class PlayCommand extends SkeppyCommand {
       node,
       track,
     });
+
+    message.channel.stopTyping();
 
     if (results.type == "PLAYLIST") {
       // Add all tracks to the queue
