@@ -25,6 +25,7 @@ module.exports = class LyricsCommand extends SkeppyCommand {
       args: [
         {
           key: "_query",
+          label: "query",
           prompt: "Which song's lyrics would you like to get?",
           type: "string",
           isEmpty: (_v, message) => {
