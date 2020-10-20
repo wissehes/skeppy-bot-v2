@@ -1,0 +1,5 @@
+{
+  "no_member_vc": "You need to be in a voice channel for this command!",
+  "no_player": "Nothing is playing right now!",
+  "different_member_vc": "You're not in the same voice channel as me!"
+}

@@ -18,10 +18,12 @@
     "canvas": "^2.6.1",
     "captcha-canvas": "^2.2.1",
     "commando-provider-keyv": "^2.1.0",
+    "common-tags": "^1.8.0",
     "discord.js": "^12.3.1",
     "discord.js-commando": "discordjs/Commando",
     "keyv": "^4.0.3",
     "moment": "^2.29.1",
-    "mongoose": "^5.10.7"
+    "mongoose": "^5.10.7",
+    "shoukaku": "^1.5.2"
   }
 }

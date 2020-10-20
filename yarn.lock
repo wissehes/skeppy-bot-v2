@@ -661,7 +661,7 @@ node-canvas-with-twemoji-and-discord-emoji@^1.1.4:
     canvas "^2.6.1"
     twemoji "^12.1.5"
 
-node-fetch@^2.6.0:
+node-fetch@^2.6.0, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
@@ -913,6 +913,15 @@ setimmediate@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/setimmediate/-/setimmediate-1.0.5.tgz#290cbb232e306942d7d7ea9b83732ab7856f8285"
   integrity sha1-KQy7Iy4waULX1+qbg3Mqt4VvgoU=
+
+shoukaku@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/shoukaku/-/shoukaku-1.5.2.tgz#797576ebf40a4979fedf9ff2dd46e712034bde80"
+  integrity sha512-sRb6j78RHVfdy96/DdhBA1emZWdPnFH2+5JZ9t3TThjMvfiBa/AaMJMyVBpYH8svI+xOZnXEsfQyqN9BJ15oqA==
+  dependencies:
+    abort-controller "^3.0.0"
+    node-fetch "^2.6.1"
+    ws "^7.3.1"
 
 sift@7.0.1:
   version "7.0.1"
