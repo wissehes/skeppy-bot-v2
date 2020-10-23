@@ -19,7 +19,7 @@ class WelcomeUtils {
 
     for (const variable of variables) {
       formattedMessage = formattedMessage.replace(
-        `{${variable[0]}}`,
+        `{{${variable[0]}}}`,
         variable[1](member)
       );
     }
