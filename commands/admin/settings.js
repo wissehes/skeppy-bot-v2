@@ -44,6 +44,7 @@ module.exports = class SettingsCommand extends SkeppyCommand {
       group: "admin",
       description: "Change my settings!",
       guildOnly: true,
+      guarded: true,
       userPermissions: ["MANAGE_GUILD"],
       args: [
         {
