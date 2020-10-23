@@ -108,8 +108,11 @@ module.exports = class SearchCommand extends SkeppyCommand {
    */
   mapResults(results) {
     const { tracks } = results;
+    const formatMS = this.client.music.formatMS;
 
-    const mapped = tracks.map((t, i) => `**${i + 1}**. ${t.info.title}`);
+    const mapped = tracks.map(
+      (t, i) => `**${i + 1}**. ${t.info.title} **[${formatMS(t.info.length)}]**`
+    );
 
     if (mapped.length > 10) mapped.splice(10, mapped.length);
 
