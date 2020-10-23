@@ -54,6 +54,8 @@ module.exports = class SearchCommand extends SkeppyCommand {
       
       *Type a number to choose your track, type \`cancel\` to cancel*`);
 
+    message.channel.stopTyping();
+
     const sentMessage = await message.embed(embed);
 
     const filter = (m) =>
