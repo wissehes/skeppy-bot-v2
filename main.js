@@ -2,6 +2,8 @@ const path = require("path");
 const SkeppyCommandoClient = require("./structures/SkeppyCommandoClient");
 
 const config = require("./config");
+const { id } = require("common-tags");
+const WelcomeUtils = require("./utils/WelcomeUtils");
 
 const client = new SkeppyCommandoClient({
   commandPrefix: config.prefix,
@@ -40,6 +42,23 @@ client.on("message", (message) => {
   if (message.author.bot || message.channel.type !== "text") return;
 
   client.points.givePoints(message.guild, message.member, 1);
+});
+
+client.on("guildMemberAdd", async (member) => {
+  const isEnabled = await member.guild.settings.get("welcome", false);
+  const _channel = await member.guild.settings.get("welcomeChannel", null);
+  if (isEnabled && _channel) {
+    const channel = member.guild.channels.resolve(_channel);
+    if (!channel) return;
+
+    const message = await member.guild.settings.get(
+      "welcomeMessage",
+      "Welcome {user} to {server}!"
+    );
+    const formattedMessage = WelcomeUtils.formatMessage(member, message);
+
+    channel.send(formattedMessage).catch((e) => null);
+  }
 });
 
 client.on("guildCreate", () => client.updatePresence());
