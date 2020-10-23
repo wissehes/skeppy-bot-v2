@@ -1,4 +1,5 @@
-const { Guild, TextChannel } = require("discord.js");
+const { TextChannel } = require("discord.js");
+const { CommandoGuild } = require("discord.js-commando");
 const { ShoukakuPlayer } = require("shoukaku");
 const MusicUtils = require("../utils/MusicUtils");
 const SkeppyTrack = require("./SkeppyTrack");
@@ -8,7 +9,7 @@ class SkeppyDispatcher {
    * @constructor
    * @param {object} options
    * @param {SkeppyClient} options.client
-   * @param {Guild} options.guild
+   * @param {CommandoGuild} options.guild
    * @param {TextChannel} options.textChannel
    * @param {ShoukakuPlayer} options.player
    */
@@ -22,6 +23,13 @@ class SkeppyDispatcher {
     this.current = null;
 
     this.firstTrack = true;
+    /**
+     * Loop:
+     * 0 = off
+     * 1 = loop track
+     * 2 = loop queue
+     */
+    this.loop = 0;
 
     this.utils = new MusicUtils(this.client);
 
@@ -60,10 +68,25 @@ class SkeppyDispatcher {
   }
 
   async play() {
-    if (!this.client.queue.has(this.guild.id) || !this.queue.length) {
+    if (
+      !this.client.queue.has(this.guild.id) ||
+      (!this.queue.length && !this.loop)
+    ) {
       return this.destroy("emptyQueue");
     }
-    this.current = this.queue.shift();
+
+    // if loop is disabled, shift the queue.
+    // else if loop is set to whole queue,
+    // push the current song to the queue
+    // and shift the queue.
+
+    if (this.loop == 0) {
+      this.current = this.queue.shift();
+    } else if (this.loop == 2) {
+      this.queue.push(this.current);
+      this.current = this.queue.shift();
+    }
+
     await this.player.playTrack(this.current.track);
   }
 
