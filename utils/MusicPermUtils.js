@@ -70,6 +70,8 @@ class MusicPermUtils {
 
   canResume = this.canStop;
 
+  canLoop = this.canStop;
+
   /**
    * Check if there's a queue playing
    * @param {CommandoMessage} message
