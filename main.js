@@ -53,7 +53,7 @@ client.on("guildMemberAdd", async (member) => {
 
     const message = await member.guild.settings.get(
       "welcomeMessage",
-      "Welcome {user} to {server}!"
+      "Welcome {{user}} to {{server}}!"
     );
     const formattedMessage = WelcomeUtils.formatMessage(member, message);
 
