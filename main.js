@@ -39,7 +39,7 @@ client.once("ready", () => {
 client.on("message", async (message) => {
   if (message.author.bot || message.channel.type !== "text") return;
 
-  if (await message.guild.isGroupEnabled("levels")) {
+  if (await message.guild.settings.get("levels", false)) {
     const {
       leveledUp,
       points: { level },
