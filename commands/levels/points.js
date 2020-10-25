@@ -1,4 +1,5 @@
 const SkeppyCommand = require("../../structures/SkeppyCommand");
+const PointsUtils = require("../../utils/PointsUtils");
 
 module.exports = class PointsCommand extends SkeppyCommand {
   constructor(client) {
@@ -21,6 +22,8 @@ module.exports = class PointsCommand extends SkeppyCommand {
   }
 
   async run(message, { member }) {
+    if (!(await PointsUtils.checkEnabled(message))) return;
+
     message.channel.startTyping();
 
     try {

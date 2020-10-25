@@ -1,6 +1,7 @@
 const SkeppyCommand = require("../../structures/SkeppyCommand");
 
 const { embed: createEmbed } = require("../../utils/RewardUtils");
+const PointsUtils = require("../../utils/PointsUtils");
 
 module.exports = class CreaterewardCommand extends SkeppyCommand {
   constructor(client) {
@@ -30,6 +31,8 @@ module.exports = class CreaterewardCommand extends SkeppyCommand {
   }
 
   async run(message, { role, level }) {
+    if (!(await PointsUtils.checkEnabled(message))) return;
+
     if (await this.client.rewards.exists(role, level)) {
       message.reply("This reward already exists!");
       return;

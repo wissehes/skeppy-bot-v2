@@ -3,6 +3,7 @@ const SkeppyCommand = require("../../structures/SkeppyCommand");
 const RewardUtils = require("../../utils/RewardUtils");
 
 const { embed: generateEmbed } = require("../../utils/RewardUtils");
+const PointsUtils = require("../../utils/PointsUtils");
 
 module.exports = class RemoverewardCommand extends SkeppyCommand {
   constructor(client) {
@@ -18,6 +19,8 @@ module.exports = class RemoverewardCommand extends SkeppyCommand {
   }
 
   async run(message) {
+    if (!(await PointsUtils.checkEnabled(message))) return;
+
     const rewards = await this.client.rewards.all(message.guild);
 
     const embed = RewardUtils.createOverviewEmbed(message.guild, rewards);

@@ -2,6 +2,7 @@ const { MessageEmbed, Message } = require("discord.js");
 const SkeppyCommand = require("../../structures/SkeppyCommand");
 
 const { getRankEmoji } = require("../../utils/PointsUtils");
+const PointsUtils = require("../../utils/PointsUtils");
 
 module.exports = class LeaderboardCommand extends SkeppyCommand {
   constructor(client) {
@@ -16,6 +17,8 @@ module.exports = class LeaderboardCommand extends SkeppyCommand {
   }
 
   async run(message) {
+    if (!(await PointsUtils.checkEnabled(message))) return;
+
     const allPoints = await this.client.points.getAll(message.guild);
 
     // Filter our users that are not in the server anymore and
