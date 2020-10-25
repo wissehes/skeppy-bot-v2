@@ -42,7 +42,17 @@ client.on("message", async (message) => {
   if (message.author.bot || message.channel.type !== "text") return;
 
   if (await message.guild.isGroupEnabled("levels")) {
-    client.points.givePoints(message.guild, message.member, 1);
+    const {
+      leveledUp,
+      points: { level },
+    } = await client.points.givePoints(message.guild, message.member, 1);
+
+    if (leveledUp) {
+      message.say(
+        `Congratulations ${message.author.toString()}, you've leveled up to level ${level}!`
+      );
+    }
+
     client.rewards.checkAndReward(message);
   }
 });
