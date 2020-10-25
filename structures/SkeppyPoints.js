@@ -55,10 +55,19 @@ class SkeppyPoints {
     const points = await this.get(guild, member);
 
     points.points += amount;
-    points.level = PointsUtils.calculateLevel(points.points);
+
+    const currentLevel = points.level;
+    const newLevel = PointsUtils.calculateLevel(points.points);
+
+    const leveledUp = newLevel > currentLevel;
+
+    points.level = newLevel;
 
     await points.save();
-    return points;
+    return {
+      leveledUp,
+      points,
+    };
   }
 
   /**
