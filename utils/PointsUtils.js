@@ -76,6 +76,15 @@ class PointsUtils {
     };
     return emojis[rank] || emojis.else;
   }
+
+  static async checkEnabled(message) {
+    if (await message.guild.settings.get("levels", false)) {
+      return true;
+    } else {
+      message.reply(`levels are disabled!`);
+      return false;
+    }
+  }
 }
 
 module.exports = PointsUtils;
