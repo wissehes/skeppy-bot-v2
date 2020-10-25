@@ -14,6 +14,7 @@ module.exports = class WelcomeCommand extends SkeppyCommand {
       description: "Set up welcome messages!",
       userPermissions: ["MANAGE_GUILD"],
       guildOnly: true,
+      guarded: true,
       args: [
         {
           key: "action",
