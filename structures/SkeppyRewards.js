@@ -1,7 +1,12 @@
 const { Guild, Role } = require("discord.js");
+const { CommandoMessage } = require("discord.js-commando");
 const Reward = require("../db/models/Reward");
+const SkeppyCommandoClient = require("./SkeppyCommandoClient");
 
 class SkeppyRewards {
+  /**
+   * @param {SkeppyCommandoClient} client
+   */
   constructor(client) {
     this.client = client;
   }
@@ -16,6 +21,24 @@ class SkeppyRewards {
     });
 
     return all;
+  }
+
+  /**
+   * Check and give the rewards
+   * @param {CommandoMessage} message
+   */
+  async checkAndReward(message) {
+    const rewards = await this.all(message.guild);
+    const userPoints = await this.client.points.get(
+      message.guild,
+      message.member
+    );
+
+    for (const reward of rewards) {
+      if (userPoints.level >= reward.level) {
+        message.member.roles.add(reward.roleID).catch((e) => null);
+      }
+    }
   }
 
   /**
