@@ -43,6 +43,7 @@ client.on("message", async (message) => {
 
   if (await message.guild.isGroupEnabled("levels")) {
     client.points.givePoints(message.guild, message.member, 1);
+    client.rewards.checkAndReward(message);
   }
 });
 
