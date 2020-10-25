@@ -6,7 +6,7 @@ const settings = [
   new Setting({
     name: "🏆 Levels",
     key: "levels",
-    type: "group",
+    type: "boolean",
     description: "Turn levels on or off",
   }),
   new Setting({
