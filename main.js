@@ -38,10 +38,12 @@ client.once("ready", () => {
   setInterval(() => client.updatePresence(), 3600000);
 });
 
-client.on("message", (message) => {
+client.on("message", async (message) => {
   if (message.author.bot || message.channel.type !== "text") return;
 
-  client.points.givePoints(message.guild, message.member, 1);
+  if (await message.guild.isGroupEnabled("levels")) {
+    client.points.givePoints(message.guild, message.member, 1);
+  }
 });
 
 client.on("guildMemberAdd", async (member) => {
