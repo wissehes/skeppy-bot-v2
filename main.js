@@ -1,8 +1,6 @@
 const path = require("path");
 const SkeppyCommandoClient = require("./structures/SkeppyCommandoClient");
-
 const config = require("./config");
-const { id } = require("common-tags");
 const WelcomeUtils = require("./utils/WelcomeUtils");
 
 const client = new SkeppyCommandoClient({
