@@ -127,5 +127,6 @@ db/settings.sqlite
 # Custom presence store
 db/presence.txt
 
-# Old scores
+# Old data
 scores.sqlite
+oldsettings.json
