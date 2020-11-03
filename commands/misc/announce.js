@@ -69,21 +69,27 @@ module.exports = class AnnounceCommand extends SkeppyCommand {
       await this.updateAnnounceEmbed(sent);
 
       const channels = guild.channels.cache.filter((c) => c.type == "text");
-      const channel =
-        guild.systemChannel ||
-        channels.cache.find((c) => c.name.includes("general")) ||
-        channels.cache.random();
+      try {
+        if (channels.size) {
+          const channel =
+            guild.systemChannel ||
+            channels.cache.find((c) => c.name.includes("general")) ||
+            channels.cache.random();
 
-      channel
-        .send(toSend)
-        .then(() => sent.success++)
-        .catch(() => sent.failed++)
-        .finally(async () => {
-          sent.done++;
-          await this.updateAnnounceEmbed(sent);
-        });
+          channel
+            .send(toSend)
+            .then(() => sent.success++)
+            .catch(() => sent.failed++)
+            .finally(async () => {
+              sent.done++;
+              await this.updateAnnounceEmbed(sent);
+            });
 
-      await this.wait(5000);
+          await this.wait(5000);
+        }
+      } catch (e) {
+        continue;
+      }
     }
 
     message.say("Done announcing!");
