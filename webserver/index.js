@@ -18,7 +18,8 @@ function run(client) {
     next();
   });
 
-  app.get("/api/stats", (req, res) => {
+  app.get("/api/stats", async (req, res) => {
+    const usages = await client.usages.all();
     const stats = {
       servers: client.guilds.cache.size,
       users: client.users.cache.size,
@@ -26,7 +27,7 @@ function run(client) {
       uptime: Math.round(process.uptime()),
       uptime_formatted: info.getNodeUptime(),
       commands: client.registry.commands.size,
-      //executedCommands: executedCommands,
+      executedCommands: usages,
     };
 
     res.send(stats);
