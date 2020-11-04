@@ -1,4 +1,4 @@
-const { User } = require("discord.js");
+const { User, Guild } = require("discord.js");
 const Braincell = require("../db/models/Braincell");
 
 class SkeppyBraincells {
@@ -38,6 +38,23 @@ class SkeppyBraincells {
 
     await braincells.save();
     return braincells;
+  }
+
+  /**
+   * Get a leaderboard for a guild
+   * @param {number} max maximum amount of users to return
+   */
+  async leaderboard(max) {
+    const all = await Braincell.find();
+    const sorted = all
+      .filter((a) => this.client.users.cache.has(a.userId))
+      .sort((a, b) => a.braincells - b.braincells);
+
+    if (sorted.length > max) {
+      sorted.splice(max, all.length);
+    }
+
+    return sorted;
   }
 }
 
