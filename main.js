@@ -75,6 +75,8 @@ client.on("guildMemberAdd", async (member) => {
 client.on("guildCreate", () => client.updatePresence());
 client.on("guildDelete", () => client.updatePresence());
 
+client.on("commandRun", (command) => client.usages.inc(command));
+
 client.on("error", console.error);
 
 client.login(config.token);
