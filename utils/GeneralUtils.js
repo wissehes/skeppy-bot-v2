@@ -27,6 +27,14 @@ class GerneralUtils {
 
     return array;
   }
+
+  /**
+   * Returns a random value of an array
+   * @param {array} array
+   */
+  static randomValue(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
 }
 
 module.exports = GerneralUtils;
