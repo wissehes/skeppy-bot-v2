@@ -16,6 +16,7 @@ const MusicUtils = require("../utils/MusicUtils");
 const SkeppyRewards = require("./SkeppyRewards");
 
 const webserver = require("../webserver");
+const SkeppyUsages = require("./SkeppyUsages");
 
 class SkeppyCommandoClient extends CommandoClient {
   constructor(options) {
@@ -37,6 +38,8 @@ class SkeppyCommandoClient extends CommandoClient {
     this.music = new MusicUtils(this);
     // Webserver
     this.webserver = webserver(this);
+    // Usages stats
+    this.usages = new SkeppyUsages(this);
 
     // DB stuff
     connectToMongoDB(this.config.mongoURI);
