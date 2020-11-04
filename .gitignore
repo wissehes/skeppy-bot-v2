@@ -127,6 +127,9 @@ db/settings.sqlite
 # Custom presence store
 db/presence.txt
 
+# RanCommands stats
+db/rancommands.txt
+
 # Old data
 scores.sqlite
 oldsettings.json
