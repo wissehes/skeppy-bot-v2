@@ -14,6 +14,9 @@ const SkeppyMusicClient = require("./SkeppyMusicClient");
 const QueueHandler = require("./QueueHandler");
 const MusicUtils = require("../utils/MusicUtils");
 const SkeppyRewards = require("./SkeppyRewards");
+
+const webserver = require("../webserver");
+
 class SkeppyCommandoClient extends CommandoClient {
   constructor(options) {
     super(options);
@@ -32,6 +35,8 @@ class SkeppyCommandoClient extends CommandoClient {
     this.player = new SkeppyMusicClient(this, this.config.lavalinkNodes);
     this.queue = new QueueHandler(this);
     this.music = new MusicUtils(this);
+    // Webserver
+    this.webserver = webserver(this);
 
     // DB stuff
     connectToMongoDB(this.config.mongoURI);
