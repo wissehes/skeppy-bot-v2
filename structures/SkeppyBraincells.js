@@ -48,7 +48,7 @@ class SkeppyBraincells {
     const all = await Braincell.find();
     const sorted = all
       .filter((a) => this.client.users.cache.has(a.userId))
-      .sort((a, b) => a.braincells - b.braincells);
+      .sort((a, b) => b.braincells - a.braincells);
 
     if (sorted.length > max) {
       sorted.splice(max, all.length);
