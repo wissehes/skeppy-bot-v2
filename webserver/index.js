@@ -33,6 +33,23 @@ function run(client) {
     res.send(stats);
   });
 
+  app.get("/api/commands", (req, res) => {
+    const commands = client.registry.commands.map((command) => ({
+      name: command.name,
+      description: command.description,
+      aliases: command.aliases || [],
+      examples: command.examples || [],
+      group: command.group.name,
+      format: `${this.client.commandPrefix}${command.name}${
+        command.format ? " " + command.format : ""
+      }`,
+      groupID: command.groupID,
+      ownerOnly: command.ownerOnly || false,
+    }));
+
+    res.json(commands);
+  });
+
   app.listen(client.config.web.port, () =>
     console.log(`Webserver running on port ${client.config.web.port}`)
   );
