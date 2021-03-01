@@ -2,6 +2,7 @@ const path = require("path");
 const SkeppyCommandoClient = require("./structures/SkeppyCommandoClient");
 const config = require("./config");
 const WelcomeUtils = require("./utils/WelcomeUtils");
+const Sentry = require("@sentry/node");
 
 const client = new SkeppyCommandoClient({
   commandPrefix: config.prefix,
@@ -9,6 +10,16 @@ const client = new SkeppyCommandoClient({
   invite: "https://discord.gg/dTJBDRU",
   config,
 });
+
+if (config.dev) {
+  Sentry.init({
+    dsn: config.sentryDsn,
+  });
+
+  client.on("commandError", (cmd, error) => {
+    Sentry.captureException(error);
+  });
+}
 
 client.registry
   .registerDefaultTypes()
