@@ -53,6 +53,7 @@ module.exports = class CaptchaCommand extends SkeppyCommand {
 
     if (!messages.size) {
       message.say(`Times up... It was ${captcha.text}`);
+      return;
     }
 
     if (messages.first().content == captcha.text) {
