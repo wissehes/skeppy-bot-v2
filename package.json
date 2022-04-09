@@ -25,7 +25,7 @@
     "discord.js-commando": "discordjs/Commando",
     "express": "^4.17.1",
     "keyv": "^4.0.3",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "mongoose": "^5.10.7",
     "shoukaku": "^1.5.2"
   }
